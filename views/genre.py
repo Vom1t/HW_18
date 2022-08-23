@@ -23,7 +23,7 @@ class GenreView(Resource):
         return genre_schema.dump(genre_service.get_genres()), 200
 
 
-@genre_ns.route('/<int:genre_id>')
+@genre_ns.route('/<int:genre_id>/')
 class GenresView(Resource):
     def get(self, genre_id: int):
         """
@@ -32,4 +32,4 @@ class GenresView(Resource):
         """
 
         # Метод, который достанет из бд все сущности по id
-        return genre_schema.dump(genre_service.get_genre_by(genre_id)), 200
+        return genre_schema.dump([genre_service.get_genre_by_id(genre_id)]), 200

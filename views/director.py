@@ -3,13 +3,14 @@
 # Пример
 from flask_restx import Resource, Namespace
 
-director_ns = Namespace('director')
+from dao.model.schema import DirectorSchema
+from implemented import director_service
 
+director_ns = Namespace('director')
+director_schema = DirectorSchema(many=True)
 
 @director_ns.route('/')
-@director_ns.param('director_id')
-@director_ns.param('director_id')
-@director_ns.param('year')
+
 class DirectorsView(Resource):
     def get(self):
         """
@@ -19,19 +20,10 @@ class DirectorsView(Resource):
 
         # Метод, который достанет из бд все сущности
 
-        return "", 200
-
-    def post(self):
-        """
-        Добавление нового фильма
-        :return:
-        """
-
-        # Метод, который положит запись в БД
-        return "", 201
+        return director_schema.dump(director_service.get_directors()), 200
 
 
-@director_ns.route('/<int:director_id>')
+@director_ns.route('/<int:director_id>/')
 class DirectorView(Resource):
     def get(self, director_id: int):
         """
@@ -41,22 +33,5 @@ class DirectorView(Resource):
 
         # Метод, который достанет из бд все сущности по id
 
-        return "", 200
+        return director_schema.dump([director_service.get_director_by_id(director_id)]), 200
 
-    def put(self, director_id: int):
-        """
-        Изменение фильма по id
-        :return:
-        """
-
-        # Метод, который изменит запись в БД
-        return "", 201
-
-    def delete(self, director_id: int):
-        """
-        Удаления фильма по id
-        :return:
-        """
-
-        # Метод, который изменит запись в БД
-        return "", 201
