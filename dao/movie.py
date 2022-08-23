@@ -1,4 +1,4 @@
-
+# Дао для фильмов
 from dao.model.models import Movie
 
 
@@ -39,7 +39,7 @@ class MovieDAO:
     def update(self, **kwargs):
         try:
             self.session.query(Movie).filter(Movie.id==kwargs.get('id')).update(
-                **kwargs
+                kwargs
             )
             self.session.commit()
         except Exception as e:

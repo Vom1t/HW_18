@@ -1,4 +1,4 @@
-# здесь контроллеры/хендлеры/представления для обработки запросов (flask ручки). сюда импортируются сервисы из пакета service
+# Вьюшка для фильмов
 
 from flask import request
 from flask_restx import Resource, Namespace

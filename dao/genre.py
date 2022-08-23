@@ -1,4 +1,4 @@
-
+# Дао для жанров
 from dao.model.models import Genre
 
 
